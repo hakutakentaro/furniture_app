@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_072521) do
+ActiveRecord::Schema.define(version: 2020_08_12_100013) do
+
+  create_table "areas", force: :cascade do |t|
+    t.integer "put_depth"
+    t.integer "put_width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "furnitures", force: :cascade do |t|
+    t.string "furniture_name"
+    t.binary "furniture_image"
+    t.integer "furniture_depth"
+    t.integer "furniture_width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "room_name"
+    t.integer "room_depth"
+    t.integer "room_width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

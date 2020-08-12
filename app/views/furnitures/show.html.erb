@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Furniture name:</strong>
+  <%= @furniture.furniture_name %>
+</p>
+
+<p>
+  <strong>Furniture image:</strong>
+  <%= @furniture.furniture_image %>
+</p>
+
+<p>
+  <strong>Furniture depth:</strong>
+  <%= @furniture.furniture_depth %>
+</p>
+
+<p>
+  <strong>Furniture width:</strong>
+  <%= @furniture.furniture_width %>
+</p>
+
+<%= link_to 'Edit', edit_furniture_path(@furniture) %> |
+<%= link_to 'Back', furnitures_path %>

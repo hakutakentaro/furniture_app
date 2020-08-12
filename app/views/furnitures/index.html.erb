@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Furnitures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Furniture name</th>
+      <th>Furniture image</th>
+      <th>Furniture depth</th>
+      <th>Furniture width</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @furnitures.each do |furniture| %>
+      <tr>
+        <td><%= furniture.furniture_name %></td>
+        <td><%= furniture.furniture_image %></td>
+        <td><%= furniture.furniture_depth %></td>
+        <td><%= furniture.furniture_width %></td>
+        <td><%= link_to 'Show', furniture %></td>
+        <td><%= link_to 'Edit', edit_furniture_path(furniture) %></td>
+        <td><%= link_to 'Destroy', furniture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Furniture', new_furniture_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: area, local: true) do |form| %>
+  <% if area.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+      <ul>
+      <% area.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :put_depth %>
+    <%= form.number_field :put_depth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :put_width %>
+    <%= form.number_field :put_width %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
