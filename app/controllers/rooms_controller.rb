@@ -1,9 +1,10 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   # GET /rooms
   def index
-    @rooms = Room.all
+    @rooms = current_user.rooms.all
   end
 
   # GET /rooms/1
@@ -12,7 +13,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
-    @room = Room.new
+    @room = current_user.rooms.new
   end
 
   # GET /rooms/1/edit
@@ -21,38 +22,36 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    @room = Room.new(room_params)
+    @room = current_user.rooms.new(room_params)
 
     if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
+      @status = true
     else
-      render :new
+      @status = false
     end
   end
 
   # PATCH/PUT /rooms/1
   def update
     if @room.update(room_params)
-      redirect_to @room, notice: 'Room was successfully updated.'
+      @status = true
     else
-      render :edit
+      @status = false
     end
   end
 
   # DELETE /rooms/1
   def destroy
     @room.destroy
-    redirect_to rooms_url, notice: 'Room was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_room
-      @room = Room.find(params[:id])
+      @room = current_user.rooms.find_by(id: params[:id])
+      redirect_to(rooms_url, alert: "ERROR!!") if @room.blank?
     end
-
-    # Only allow a trusted parameter "white list" through.
-    def room_params
+    
+    def set_room
       params.require(:room).permit(:room_name, :room_depth, :room_width)
     end
 end

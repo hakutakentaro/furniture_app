@@ -1,5 +1,7 @@
 class AreasController < ApplicationController
-  before_action :set_area, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_room
+  before_action :set_area, only: [:show, :edit, :update, :destroy :sort]
 
   # GET /areas
   def index
@@ -12,46 +14,52 @@ class AreasController < ApplicationController
 
   # GET /areas/new
   def new
-    @area = Area.new
+    @area = @room.area.new
   end
 
   # GET /areas/1/edit
   def edit
   end
 
+  def sort
+  end
+
   # POST /areas
   def create
-    @area = Area.new(area_params)
+    @area = @room.areas.new(todo_params)
 
     if @area.save
-      redirect_to @area, notice: 'Area was successfully created.'
+      @status = true
     else
-      render :new
+      @status = false
     end
   end
 
   # PATCH/PUT /areas/1
   def update
     if @area.update(area_params)
-      redirect_to @area, notice: 'Area was successfully updated.'
+      @status = true
     else
-      render :edit
+      @status = false
     end
   end
 
   # DELETE /areas/1
   def destroy
     @area.destroy
-    redirect_to areas_url, notice: 'Area was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_area
-      @area = Area.find(params[:id])
+
+    def set_room
+      @room = current_user.rooms.find_by(id: params[:room_id])
+      redirect_to(rooms_url, alert: "ERROR!!") if @room.blank?
     end
 
-    # Only allow a trusted parameter "white list" through.
+    def set_area
+      @area = @room.areas.find_by(id: params[:id])
+    end
+
     def area_params
       params.require(:area).permit(:put_depth, :put_width)
     end
