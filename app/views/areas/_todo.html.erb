@@ -1,0 +1,39 @@
+<div class="card mt-2 area-card <%=" text-muted bg-light" if area.done %>"
+  data-model_name="<%= Area.model_name.singular %>"
+  data-room_id="<%= area.room.id %>"
+  data-id="<%= area.id %>">
+  <div class="card-body pr-1">
+    <div class="card-text pr-4">
+      <%= area.done ? tag.del(){simple_format area.content} : (simple_format area.content) %>
+    </div>
+    <div class="btn-group position-absolute" style="top: 10px; right: 4px">
+      <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-ellipsis-v"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right text-middle">
+        <%= form_with(model: area, url: [area.room, area], remote: true) do |form| %>
+          <% if area.done %>
+            <%= form.hidden_field :done, value: false, readonly: true %>
+            <%= form.submit "未完了", class: "dropdown-item text-success" %>
+          <% else %>
+            <%= form.hidden_field :done, value: true, readonly: true %>
+            <%= form.submit "完了！", class: "dropdown-item text-success" %>
+          <% end %>
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "並びかえ", sort_room_area_path(area.room, area), class: "dropdown-item", remote: true %>
+        <%= link_to "編集", edit_room_area_path(area.room, area), class: "dropdown-item", remote: true %>
+        <%= link_to "削除",
+            room_area_path(area.room, area),
+            method: :delete,
+            class: "dropdown-item text-danger",
+            remote: true, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+    <div class="card-text">
+      <small class="text-muted">
+        <%= area.created_at.strftime('%Y/%m/%d') %>
+      </small>
+    </div>
+  </div>
+</div>
