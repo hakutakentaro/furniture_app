@@ -4,6 +4,8 @@ class CreateRooms < ActiveRecord::Migration[5.2]
       t.string :room_name
       t.integer :room_depth
       t.integer :room_width
+      t.references :user, foreign_key: true
+     
 
       t.timestamps
     end

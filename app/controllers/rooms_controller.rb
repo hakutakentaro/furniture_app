@@ -7,10 +7,6 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms.all
   end
 
-  # GET /rooms/1
-  def show
-  end
-
   # GET /rooms/new
   def new
     @room = current_user.rooms.new
