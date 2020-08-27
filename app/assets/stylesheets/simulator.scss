@@ -1,0 +1,20 @@
+// Place all the styles related to the simulator controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#simu {
+	width: 75%;
+  padding: 20px 150px 20px 150px;
+  background-color: #EEE;
+  .room {
+    border: inset 10px #CCC;
+    
+  }
+}
+
+#side {
+	 width: 25%;
+   padding: 20px;
+   overflow-y: scroll;
+   background-color: #F99;
+}
