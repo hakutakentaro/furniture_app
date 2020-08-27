@@ -2,9 +2,8 @@
   data-model_name="<%= Room.model_name.singular %>"
   data-id="<%= room.id %>">
   <div class="d-flex flex-column h-100" style="width: 25rem; min-width: 25rem;">
-    <div class="font-weight-bold px-4 py-2 goal-header">
+    <div class="font-weight-bold px-4 py-2 room-header">
       <div class="pr-5">
-        <%= room.title %>
       </div>
       <div class="text-right position-absolute" style="top: 4px; right: 4px">
         <%= link_to(new_room_area_path(room), title: "New AREA", class: "btn px-0", remote: true) do %><i class="fas fa-plus align-middle"></i><% end %>

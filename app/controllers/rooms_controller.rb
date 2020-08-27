@@ -7,6 +7,11 @@ class RoomsController < ApplicationController
     @rooms = current_user.rooms.all
   end
 
+  #GET /roms/1
+  def show
+    
+  end
+
   # GET /rooms/new
   def new
     @room = current_user.rooms.new
@@ -21,9 +26,9 @@ class RoomsController < ApplicationController
     @room = current_user.rooms.new(room_params)
 
     if @room.save
-      @status = true
+      redirect_to @room, notice: 'Room was successfully created.'
     else
-      @status = false
+      render :new
     end
   end
 
@@ -47,7 +52,7 @@ class RoomsController < ApplicationController
       redirect_to(rooms_url, alert: "ERROR!!") if @room.blank?
     end
     
-    def set_room
-      params.require(:room).permit(:room_name, :room_depth, :room_width)
+    def room_params
+      params.require(:room).permit(:room_depth, :room_width, :user_id)
     end
 end
